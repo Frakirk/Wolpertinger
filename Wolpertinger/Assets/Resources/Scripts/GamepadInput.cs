@@ -33,6 +33,7 @@ public class GamepadInput : MonoBehaviour
 		circleCol = GetComponent<CircleCollider2D>();
 		onGround = false;
         jumping = false;
+        wingFlap = 0;
 	}
 
 	void Update () 
@@ -68,7 +69,6 @@ public class GamepadInput : MonoBehaviour
             checkIfOnWall();        // sets onWall
         }
 
-
         if (inputRTrigger > wingFlap)                               // check whether the trigger has been pressed further since last frame
         {
             float pushForce;
@@ -88,7 +88,7 @@ public class GamepadInput : MonoBehaviour
             }
             rbody.velocity -= new Vector2(wingXVal, wingYVal);          // apply the force vector to the player
         }
-        wingFlap = inputRTrigger;                                   // set wingFlap to this frame's input value, so that next frame's check on line 82 is accurate
+        wingFlap = inputRTrigger;                                   // set wingFlap to this frame's input value, so that next frame's check on line 72 is accurate
 
 
         if (Input.GetButtonDown(player + "BtnA"))                       // check if the jump button has been pressed
@@ -102,9 +102,9 @@ public class GamepadInput : MonoBehaviour
             }
             else if (onPlayer)                                              // check if the player is jumping off the top of another player
             {
+                Debug.Log("WOAH");
                 rbody.velocity += new Vector2(0, jumpForce * 0.75f);            // apply a reduced vertical force to make the player rise
-                launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall
-                //wingBoostCount = 0;                                         
+                launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall                                      
                 goomba.velocity += new Vector2(0, jumpForce * -0.5f);           // apply a force downwards on the player that has been jumped on
                 jumping = true;                                                 // 'jumping' will be true until the jump button is released
                 jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
