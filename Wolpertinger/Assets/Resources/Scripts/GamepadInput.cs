@@ -5,17 +5,24 @@ public class GamepadInput : MonoBehaviour
 {
 	public string player;
 
-	public float runSpeedAccel;
+    public float defaultDrag;
+    public float runSpeedAccel;
 	public float runSpeedMax;
 	public float jumpForce;
-	public float defaultDrag;
+    public float wingForce;
+    public int wingBoostMax;
 
-	private float jumpCharge;
+    private GameObject wingBoostAura;
+    private float jumpCharge;
+    private float wingCharge;
+
 	private float launchBuffer;             // launchBuffer prevents surface-contact checks for a short time after each jump. This is needed to prevent some unwanted jump exploits and behaviours.
 	private float wingXVal, wingYVal;
     private float wingFlap;
 
+    private int wingBoostCount;
     private bool jumping;
+    private bool wingBoosting;
     private bool onGround;
 	private int onWall;
 	private bool onPlayer;
@@ -33,7 +40,9 @@ public class GamepadInput : MonoBehaviour
 		circleCol = GetComponent<CircleCollider2D>();
 		onGround = false;
         jumping = false;
+        wingBoosting = false;
         wingFlap = 0;
+        wingBoostCount = 0;
 	}
 
 	void Update () 
@@ -102,7 +111,6 @@ public class GamepadInput : MonoBehaviour
             }
             else if (onPlayer)                                              // check if the player is jumping off the top of another player
             {
-                Debug.Log("WOAH");
                 rbody.velocity += new Vector2(0, jumpForce * 0.75f);            // apply a reduced vertical force to make the player rise
                 launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall                                      
                 goomba.velocity += new Vector2(0, jumpForce * -0.5f);           // apply a force downwards on the player that has been jumped on
@@ -136,8 +144,34 @@ public class GamepadInput : MonoBehaviour
             }
         }
 
+        if (Input.GetButtonDown(player + "RightBumper") && wingBoostCount < wingBoostMax)                       // check if the jump button has been pressed
+        {
+            wingXVal = inputXAxis * wingForce;
+            wingYVal = -inputYAxis * wingForce;
+            if (wingYVal > 0)
+                wingYVal *= 1.25f;
+            rbody.velocity = new Vector2(wingXVal, wingYVal);
+            launchBuffer = 0.2f;
+            wingCharge = 0.25f;
+            wingBoostCount++;
+            wingBoostAura = (GameObject)Instantiate(Resources.Load("WingBoostAura"), transform.position, transform.rotation);
+            (wingBoostAura.GetComponent<WingBoostAura>()).parent = gameObject;
+            //wingBoosting = true;
+        }
+        else if (wingCharge > 0)                                             // check if the player is should still be gaining force from the jump
+        {
+            wingXVal = inputXAxis * wingForce * 5f * Time.deltaTime;
+            wingYVal = -inputYAxis * wingForce * 5f * Time.deltaTime;
+            rbody.velocity += new Vector2(wingXVal, wingYVal);   // add the extra jump force for keeping the button pressed
+            wingCharge -= Time.deltaTime;                                     // reduce the time remaining on jumpCharge
+            if (wingCharge <= 0)
+            {
+                wingCharge = 0;
+                Destroy(wingBoostAura);
+            }
+        }
 
-		if (launchBuffer > 0)                   // check if there is time remaining on launchBuffer
+        if (launchBuffer > 0)                   // check if there is time remaining on launchBuffer
 		{
 			launchBuffer -= Time.deltaTime;         // remove time from launchBuffer
 			if (launchBuffer < 0)                   // check if launchBuffer has run out of time
@@ -168,10 +202,13 @@ public class GamepadInput : MonoBehaviour
     {
         Vector2 groundCheckVec;                                                                 // vector to check a position below the player
         groundCheckVec = new Vector2(rbody.position.x, rbody.position.y - 0.1f);                // the position of the vector is only 0.1 below the centre of the player
-		if (Physics2D.OverlapCircle(groundCheckVec, 0.45f, 1 << 8, 0f, 0f) != null)             // using a circle collider slightly smaller than the player, check for collisions on the wall layer
-			onGround = true;                                                                        // the player is ground
-		else                                                                                    // else
-			onGround = false;                                                                       // the player is ungrounded
+        if (Physics2D.OverlapCircle(groundCheckVec, 0.45f, 1 << 8, 0f, 0f) != null)             // using a circle collider slightly smaller than the player, check for collisions on the wall layer
+        {
+            onGround = true;                                                                        // the player is ground
+            wingBoostCount = 0;
+        }
+        else                                                                                    // else
+            onGround = false;                                                                       // the player is ungrounded
 	}
 
 	void checkIfOnWall()                                                                    // checks if the player is on a wall
@@ -179,12 +216,18 @@ public class GamepadInput : MonoBehaviour
         onWall = 0;                                                                             // sets onWall to 0, indicating that the player is not on a wall. If the next two checks fail, this is the final value.
         Vector2 wallCheckVec;                                                                   // vector to check a position to the side of the player
         wallCheckVec = new Vector2(rbody.position.x + (circleCol.radius)*-1, rbody.position.y); // the position of the vector is to the player's left
-		if (Physics2D.OverlapCircle(wallCheckVec, 0.15f, 1 << 8, 0f, 0f) != null)               // using a small circle collider, check for a wall to the player's left (WALL CHECK 1)
-			onWall = -1;                                                                            // set onWall to -1, indicating a wall to the left
+        if (Physics2D.OverlapCircle(wallCheckVec, 0.15f, 1 << 8, 0f, 0f) != null)               // using a small circle collider, check for a wall to the player's left (WALL CHECK 1)
+        {
+            onWall = -1;                                                                            // set onWall to -1, indicating a wall to the left
+            wingBoostCount = 0;
+        }
         wallCheckVec = new Vector2(rbody.position.x + (circleCol.radius), rbody.position.y);    // the position of the vector is now to the player's right
         if (Physics2D.OverlapCircle(wallCheckVec, 0.15f, 1 << 8, 0f, 0f) != null)               // circle collider check to the right (WALL CHECK 2)
-			onWall = 1;                                                                             // set onWall to 1, indicating a wall to the right
-	}
+        {
+            onWall = 1;                                                                             // set onWall to 1, indicating a wall to the right
+            wingBoostCount = 0;
+        }
+    }
 	
 	void checkIfOnPlayer()                                                                  // checks if the player is on another player
 	{
@@ -196,6 +239,7 @@ public class GamepadInput : MonoBehaviour
 		{
 			onPlayer = true;                                                                        // the player is on another player
 			goomba = goombaList[0].GetComponent<Rigidbody2D>();                                     // keep a reference to the first colliding player on the list (couldn't think of a better variable name sorry) 
+            wingBoostCount = 0;
 		}
 		else                                                                                    // else
 			onPlayer = false;                                                                       // the player is not on another player
