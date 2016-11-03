@@ -139,7 +139,7 @@ public class GamepadInput : MonoBehaviour
         {
             if (jumpCharge > 0)                                             // check if the player is should still be gaining force from the jump
             {                                                               
-                rbody.velocity += new Vector2(0, jumpForce*2*Time.deltaTime);   // add the extra jump force for keeping the button pressed
+                rbody.velocity += new Vector2(0, jumpForce*3*Time.deltaTime);   // add the extra jump force for keeping the button pressed
                 jumpCharge -= Time.deltaTime;                                   // reduce the time remaining on jumpCharge
             }
         }
@@ -154,6 +154,9 @@ public class GamepadInput : MonoBehaviour
             launchBuffer = 0.2f;
             wingCharge = 0.25f;
             wingBoostCount++;
+            //Debug.Log(wingBoostCount);
+            if (wingBoostAura != null)
+                Destroy(wingBoostAura);
             wingBoostAura = (GameObject)Instantiate(Resources.Load("WingBoostAura"), transform.position, transform.rotation);
             (wingBoostAura.GetComponent<WingBoostAura>()).parent = gameObject;
             //wingBoosting = true;
@@ -201,11 +204,12 @@ public class GamepadInput : MonoBehaviour
     void checkIfOnGround()                                                                  // checks if the player is on the ground
     {
         Vector2 groundCheckVec;                                                                 // vector to check a position below the player
-        groundCheckVec = new Vector2(rbody.position.x, rbody.position.y - 0.1f);                // the position of the vector is only 0.1 below the centre of the player
+        groundCheckVec = new Vector2(rbody.position.x, rbody.position.y - 0.15f);                // the position of the vector is only 0.1 below the centre of the player
         if (Physics2D.OverlapCircle(groundCheckVec, 0.45f, 1 << 8, 0f, 0f) != null)             // using a circle collider slightly smaller than the player, check for collisions on the wall layer
         {
             onGround = true;                                                                        // the player is ground
             wingBoostCount = 0;
+            Debug.Log("wingboost reset");
         }
         else                                                                                    // else
             onGround = false;                                                                       // the player is ungrounded
@@ -220,12 +224,14 @@ public class GamepadInput : MonoBehaviour
         {
             onWall = -1;                                                                            // set onWall to -1, indicating a wall to the left
             wingBoostCount = 0;
+            Debug.Log("wingboost reset");
         }
         wallCheckVec = new Vector2(rbody.position.x + (circleCol.radius), rbody.position.y);    // the position of the vector is now to the player's right
         if (Physics2D.OverlapCircle(wallCheckVec, 0.15f, 1 << 8, 0f, 0f) != null)               // circle collider check to the right (WALL CHECK 2)
         {
             onWall = 1;                                                                             // set onWall to 1, indicating a wall to the right
             wingBoostCount = 0;
+            Debug.Log("wingboost reset");
         }
     }
 	
@@ -240,7 +246,8 @@ public class GamepadInput : MonoBehaviour
 			onPlayer = true;                                                                        // the player is on another player
 			goomba = goombaList[0].GetComponent<Rigidbody2D>();                                     // keep a reference to the first colliding player on the list (couldn't think of a better variable name sorry) 
             wingBoostCount = 0;
-		}
+            Debug.Log("wingboost reset");
+        }
 		else                                                                                    // else
 			onPlayer = false;                                                                       // the player is not on another player
 		transform.position -= new Vector3(9999, 9999, 9999);                                    //bring the player back from the far off place they were sent to

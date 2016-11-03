@@ -14,9 +14,9 @@ public class LevelGenerator : MonoBehaviour {
 	void Start () {
         nextModuleGenerated = false;
 
-        nextModuleName = "LevelModule" + Random.Range(0, uniqueModules);
+        nextModuleName = "ModuleMidgard" + Random.Range(0, uniqueModules);
         while (nextModuleName == name)
-            nextModuleName = "LevelModule" + Random.Range(0, uniqueModules);
+            nextModuleName = "ModuleMidgard" + Random.Range(0, uniqueModules);
 
         gameCamera = GameObject.Find("Main Camera");
     }
