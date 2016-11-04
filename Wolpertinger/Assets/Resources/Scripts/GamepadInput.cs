@@ -18,11 +18,11 @@ public class GamepadInput : MonoBehaviour
 
 	private float launchBuffer;             // launchBuffer prevents surface-contact checks for a short time after each jump. This is needed to prevent some unwanted jump exploits and behaviours.
 	private float wingXVal, wingYVal;
-    private float wingFlap;
+    //private float wingFlap;
 
     private int wingBoostCount;
     private bool jumping;
-    private bool wingBoosting;
+    //private bool wingBoosting;
     private bool onGround;
 	private int onWall;
 	private bool onPlayer;
@@ -40,8 +40,7 @@ public class GamepadInput : MonoBehaviour
 		circleCol = GetComponent<CircleCollider2D>();
 		onGround = false;
         jumping = false;
-        wingBoosting = false;
-        wingFlap = 0;
+        //wingBoosting = false;
         wingBoostCount = 0;
 	}
 
@@ -49,7 +48,7 @@ public class GamepadInput : MonoBehaviour
 	{
 		inputXAxis = Input.GetAxis (player + "LeftAxisX");       // between -1 and +1
 		inputYAxis = Input.GetAxis(player + "LeftAxisY");        // between -1 and +1
-        inputRTrigger = Input.GetAxis(player + "RightTrigger");  // between 0 and +1
+        //inputRTrigger = Input.GetAxis(player + "RightTrigger");  // between 0 and +1
 
 		if (inputXAxis > 0)                                                         // check if the player is holding the stick right
 		{
@@ -77,28 +76,6 @@ public class GamepadInput : MonoBehaviour
             checkIfOnPlayer();      // sets onPayer
             checkIfOnWall();        // sets onWall
         }
-
-        if (inputRTrigger > wingFlap)                               // check whether the trigger has been pressed further since last frame
-        {
-            float pushForce;
-            pushForce = -Mathf.Sqrt((inputRTrigger - wingFlap) * 3);    // magic math soup to get the force to apply this frame. Scales with how far the trigger has been pulled
-            if (pushForce < -0.66f)                                     // checks if the trigger was pulled too fast
-                pushForce = -0.66f;                                         // sets the force to the max allowed value
-            wingXVal = pushForce * inputXAxis * runSpeedAccel;          // sets the horizontal component of the force vector to be added
-            wingYVal = pushForce;                                       // sets the vertical component's base value
-            if (inputYAxis < 0)                                         // check if the analogue stick is pointing downward
-                wingYVal *= inputYAxis;                                     // adjust the vertical component to the stick's downward angle 
-            if (wingYVal < 0)                                           // check if the vartical component will make the player rise
-            {
-                if (rbody.velocity.y < 0)                                   // check if the player is falling
-                    wingYVal *= 6;                                              // increase the vertical force significantly
-                else
-                    wingYVal *= 3;                                              // increase the vertical force less
-            }
-            rbody.velocity -= new Vector2(wingXVal, wingYVal);          // apply the force vector to the player
-        }
-        wingFlap = inputRTrigger;                                   // set wingFlap to this frame's input value, so that next frame's check on line 72 is accurate
-
 
         if (Input.GetButtonDown(player + "BtnA"))                       // check if the jump button has been pressed
         {
@@ -154,12 +131,10 @@ public class GamepadInput : MonoBehaviour
             launchBuffer = 0.2f;
             wingCharge = 0.25f;
             wingBoostCount++;
-            //Debug.Log(wingBoostCount);
             if (wingBoostAura != null)
                 Destroy(wingBoostAura);
             wingBoostAura = (GameObject)Instantiate(Resources.Load("WingBoostAura"), transform.position, transform.rotation);
             (wingBoostAura.GetComponent<WingBoostAura>()).parent = gameObject;
-            //wingBoosting = true;
         }
         else if (wingCharge > 0)                                             // check if the player is should still be gaining force from the jump
         {
@@ -199,7 +174,6 @@ public class GamepadInput : MonoBehaviour
         }
     }
     //-----------------------------------END OF Update()---------------------------------------------------
-
     
     void checkIfOnGround()                                                                  // checks if the player is on the ground
     {
@@ -209,7 +183,6 @@ public class GamepadInput : MonoBehaviour
         {
             onGround = true;                                                                        // the player is ground
             wingBoostCount = 0;
-            Debug.Log("wingboost reset");
         }
         else                                                                                    // else
             onGround = false;                                                                       // the player is ungrounded
@@ -224,14 +197,12 @@ public class GamepadInput : MonoBehaviour
         {
             onWall = -1;                                                                            // set onWall to -1, indicating a wall to the left
             wingBoostCount = 0;
-            Debug.Log("wingboost reset");
         }
         wallCheckVec = new Vector2(rbody.position.x + (circleCol.radius), rbody.position.y);    // the position of the vector is now to the player's right
         if (Physics2D.OverlapCircle(wallCheckVec, 0.15f, 1 << 8, 0f, 0f) != null)               // circle collider check to the right (WALL CHECK 2)
         {
             onWall = 1;                                                                             // set onWall to 1, indicating a wall to the right
             wingBoostCount = 0;
-            Debug.Log("wingboost reset");
         }
     }
 	
@@ -246,7 +217,6 @@ public class GamepadInput : MonoBehaviour
 			onPlayer = true;                                                                        // the player is on another player
 			goomba = goombaList[0].GetComponent<Rigidbody2D>();                                     // keep a reference to the first colliding player on the list (couldn't think of a better variable name sorry) 
             wingBoostCount = 0;
-            Debug.Log("wingboost reset");
         }
 		else                                                                                    // else
 			onPlayer = false;                                                                       // the player is not on another player
@@ -336,3 +306,24 @@ public class GamepadInput : MonoBehaviour
 //	if (wingForceDuration < 0)
 //		wingForceDuration = 0;
 //}
+
+//if (inputRTrigger > wingFlap)                               // check whether the trigger has been pressed further since last frame
+//{
+//    float pushForce;
+//    pushForce = -Mathf.Sqrt((inputRTrigger - wingFlap) * 3);    // magic math soup to get the force to apply this frame. Scales with how far the trigger has been pulled
+//    if (pushForce < -0.66f)                                     // checks if the trigger was pulled too fast
+//        pushForce = -0.66f;                                         // sets the force to the max allowed value
+//    wingXVal = pushForce * inputXAxis * runSpeedAccel;          // sets the horizontal component of the force vector to be added
+//    wingYVal = pushForce;                                       // sets the vertical component's base value
+//    if (inputYAxis < 0)                                         // check if the analogue stick is pointing downward
+//        wingYVal *= inputYAxis;                                     // adjust the vertical component to the stick's downward angle 
+//    if (wingYVal < 0)                                           // check if the vartical component will make the player rise
+//    {
+//        if (rbody.velocity.y < 0)                                   // check if the player is falling
+//            wingYVal *= 6;                                              // increase the vertical force significantly
+//        else
+//            wingYVal *= 3;                                              // increase the vertical force less
+//    }
+//    rbody.velocity -= new Vector2(wingXVal, wingYVal);          // apply the force vector to the player
+//}
+//wingFlap = inputRTrigger;                                   // set wingFlap to this frame's input value, so that next frame's check on line 72 is accurate

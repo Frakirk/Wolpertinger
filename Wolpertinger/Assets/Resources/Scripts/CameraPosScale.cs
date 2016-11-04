@@ -3,40 +3,61 @@ using System.Collections;
 
 public class CameraPosScale : MonoBehaviour {
 
-    Camera gameCamera;
     float xPos, yPos;
-    Vector2 p1Pos, p2Pos, p3Pos, p4Pos, selfPos;
-    Transform p1Transform, p2Transform, p3Transform, p4Transform, selfTransform;
-    float playerDist;
-    public float screenSizeSmall, screenSizeLarge;
+    Vector2 selfPos;
+    Transform selfTransform;
+    Transform[] playerTransforms;
+    //float playerDist;
+    GameObject gameManager;
+    bool[] players;
+    float[] xPositions;
+    float[] yPositions;
 
-	void Start ()
+    //public float screenSizeSmall, screenSizeLarge;
+
+    void Start ()
     {
-        gameCamera = (GameObject.Find("Main Camera")).GetComponent<Camera>();
-        p1Transform = (GameObject.Find("Player1")).transform;
-        p2Transform = (GameObject.Find("Player2")).transform;
-        //p3Transform = (GameObject.Find("Player3")).transform;
-        //p4Transform = (GameObject.Find("Player4")).transform;
+        gameManager = GameObject.Find("GameManager");
+        xPositions = new float[4];
+        yPositions = new float[4];
+        playerTransforms = new Transform[4];
+        CountPlayers();
         xPos = 0;
         yPos = 0;
         selfTransform = GetComponent<Transform>();
-
     }
 
     void Update()
     {
-        p1Pos = p1Transform.position;
-        p2Pos = p2Transform.position;
-        //p3Pos = p3Transform.position;
-        //p4Pos = p4Transform.position;
+        var j = 0;
+        while (players[j] == false)
+        {
+            j++;
+            if (j > 3)
+                break;
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            if (players[i])
+            {
+                xPositions[i] = playerTransforms[i].position.x;
+                yPositions[i] = playerTransforms[i].position.y;
+            }
+            else if (j <= 3)
+            {
+                xPositions[i] = playerTransforms[j].position.x;
+                yPositions[i] = playerTransforms[j].position.y;
+            }
+        }
+
         selfPos = selfTransform.position;
 
-        playerDist = Vector2.Distance(p1Pos, p2Pos);
+        //playerDist = Vector2.Distance(p1Pos, p2Pos);
 
-        xPos = (Mathf.Max(p1Pos.x, p2Pos.x, p3Pos.x, p4Pos.x) + Mathf.Min(p1Pos.x, p2Pos.x)) * 0.5f;
+        xPos = (Mathf.Max(xPositions) + Mathf.Min(xPositions)) * 0.5f;
         xPos = (xPos - selfPos.x) * Time.deltaTime;
 
-        yPos = Mathf.Max(p1Pos.y, p2Pos.y)-4;
+        yPos = Mathf.Max(yPositions)-4;
         yPos = (yPos - selfPos.y) * Time.deltaTime*2;
 
         transform.position += new Vector3(xPos, yPos);
@@ -46,5 +67,18 @@ public class CameraPosScale : MonoBehaviour {
         //    gameCamera.orthographicSize = screenSizeLarge;
         //else
         //    gameCamera.orthographicSize = playerDist;
+    }
+
+    public void CountPlayers()
+    {
+        players = gameManager.GetComponent<GameManager>().players;
+        for (int i = 0; i < 4; i++)
+        {
+            if (players[i])
+            {
+                var player = GameObject.FindGameObjectWithTag("Player" + (i + 1).ToString());
+                playerTransforms[i] = player.transform;
+            }
+        }
     }
 }
