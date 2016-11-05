@@ -16,7 +16,7 @@ public class WingBoostAura : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && other.name != parent.name)
+        if (other.tag.Substring(0, 6) == "Player" && other.tag != parent.tag)
         {
             rbody = other.GetComponent<Rigidbody2D>();
             var xForce =  rbody.transform.position.x - parent.transform.position.x;

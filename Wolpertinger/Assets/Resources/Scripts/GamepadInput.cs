@@ -11,6 +11,7 @@ public class GamepadInput : MonoBehaviour
 	public float jumpForce;
     public float wingForce;
     public int wingBoostMax;
+    public GameManager gameManager;
 
     private GameObject wingBoostAura;
     private float jumpCharge;
@@ -38,6 +39,7 @@ public class GamepadInput : MonoBehaviour
 	{
 		rbody = GetComponent<Rigidbody2D>();
 		circleCol = GetComponent<CircleCollider2D>();
+        //gameManager = (GameObject.Find("GameManager")).GetComponent<GameManager>();
 		onGround = false;
         jumping = false;
         //wingBoosting = false;
@@ -46,6 +48,12 @@ public class GamepadInput : MonoBehaviour
 
 	void Update () 
 	{
+        if (Input.GetButtonDown(player + "Start"))
+            gameManager.PauseGame();
+
+        if (gameManager.gamePaused)
+            return;
+
 		inputXAxis = Input.GetAxis (player + "LeftAxisX");       // between -1 and +1
 		inputYAxis = Input.GetAxis(player + "LeftAxisY");        // between -1 and +1
         //inputRTrigger = Input.GetAxis(player + "RightTrigger");  // between 0 and +1
@@ -72,82 +80,14 @@ public class GamepadInput : MonoBehaviour
         //check what surfaces the player is in contact with
         if (launchBuffer == 0)  // check if the launchBuffer isn't active
         {
-            checkIfOnGround();      // sets onGround
-            checkIfOnPlayer();      // sets onPayer
-            checkIfOnWall();        // sets onWall
+            CheckIfOnGround();      // sets onGround
+            CheckIfOnPlayer();      // sets onPayer
+            CheckIfOnWall();        // sets onWall
         }
 
-        if (Input.GetButtonDown(player + "BtnA"))                       // check if the jump button has been pressed
-        {
-            if (onGround)                                                   // check if the player is jumping from the ground
-            {
-                rbody.velocity += new Vector2(0, jumpForce);                    // apply a vertical force to make the player rise
-                launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall
-                jumping = true;                                                 // 'jumping' will be true until the jump button is released
-                jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
-            }
-            else if (onPlayer)                                              // check if the player is jumping off the top of another player
-            {
-                rbody.velocity += new Vector2(0, jumpForce * 0.75f);            // apply a reduced vertical force to make the player rise
-                launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall                                      
-                goomba.velocity += new Vector2(0, jumpForce * -0.5f);           // apply a force downwards on the player that has been jumped on
-                jumping = true;                                                 // 'jumping' will be true until the jump button is released
-                jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
-            }
-            else if (onWall != 0)                                           // check if the player is jumping off the side of a wall
-            { 
-                rbody.velocity += new Vector2(onWall * -7.5f, jumpForce*1.5f);  // apply a force that pushes the player upwards and horizontally away from the wall
-                launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall
-                rsaStore = runSpeedAccel;                                       // store the value of runSpeedAccel
-                runSpeedAccel = 0;                                              // set runSpeedAccel to 0, preventing the player from accelerating horizontally
-                wjMoveDamper = 0.2f;                                            // set the amount of time until runSpeedAccel is returned to its original value
-                jumping = true;                                                 // 'jumping' will be true until the jump button is released
-                jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
-            }
-            onGround = false;                                               // player is not grounded,
-            onPlayer = false;                                               // player is not on top of another player,
-            onWall = 0;                                                     // player is not on a wall.
-        }
-        else if (Input.GetButtonUp(player + "BtnA"))                    // check if the jump button has been released
-        {
-            jumping = false;                                                // set jumping to false, to indicate that the jump button is not being pressed
-        }
-        else if (jumping)                                               // check if the jump button is still pressed
-        {
-            if (jumpCharge > 0)                                             // check if the player is should still be gaining force from the jump
-            {                                                               
-                rbody.velocity += new Vector2(0, jumpForce*3*Time.deltaTime);   // add the extra jump force for keeping the button pressed
-                jumpCharge -= Time.deltaTime;                                   // reduce the time remaining on jumpCharge
-            }
-        }
+        CheckJumpButton();
 
-        if (Input.GetButtonDown(player + "RightBumper") && wingBoostCount < wingBoostMax)                       // check if the jump button has been pressed
-        {
-            wingXVal = inputXAxis * wingForce;
-            wingYVal = -inputYAxis * wingForce;
-            if (wingYVal > 0)
-                wingYVal *= 1.25f;
-            rbody.velocity = new Vector2(wingXVal, wingYVal);
-            launchBuffer = 0.2f;
-            wingCharge = 0.25f;
-            wingBoostCount++;
-            if (wingBoostAura != null)
-                Destroy(wingBoostAura);
-            wingBoostAura = (GameObject)Instantiate(Resources.Load("WingBoostAura"), transform.position, transform.rotation);
-            (wingBoostAura.GetComponent<WingBoostAura>()).parent = gameObject;
-        }
-        else if (wingCharge > 0)                                             // check if the player is should still be gaining force from the jump
-        {
-            wingXVal = inputXAxis * wingForce * 5f * Time.deltaTime;
-            wingYVal = -inputYAxis * wingForce * 5f * Time.deltaTime;
-            rbody.velocity += new Vector2(wingXVal, wingYVal);   // add the extra jump force for keeping the button pressed
-            wingCharge -= Time.deltaTime;                                     // reduce the time remaining on jumpCharge
-            if (wingCharge <= 0)
-            {
-                wingCharge = 0;
-                Destroy(wingBoostAura);
-            }
-        }
+        CheckBoostButton();
 
         if (launchBuffer > 0)                   // check if there is time remaining on launchBuffer
 		{
@@ -175,7 +115,86 @@ public class GamepadInput : MonoBehaviour
     }
     //-----------------------------------END OF Update()---------------------------------------------------
     
-    void checkIfOnGround()                                                                  // checks if the player is on the ground
+    void CheckJumpButton()
+    {
+        if (Input.GetButtonDown(player + "BtnA"))                       // check if the jump button has been pressed
+        {
+
+            if (onWall != 0)                                           // check if the player is jumping off the side of a wall
+            {
+                rbody.velocity += new Vector2(onWall * -7.5f, jumpForce * 1.5f);  // apply a force that pushes the player upwards and horizontally away from the wall
+                launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall
+                rsaStore = runSpeedAccel;                                       // store the value of runSpeedAccel
+                runSpeedAccel = 0;                                              // set runSpeedAccel to 0, preventing the player from accelerating horizontally
+                wjMoveDamper = 0.2f;                                            // set the amount of time until runSpeedAccel is returned to its original value
+                jumping = true;                                                 // 'jumping' will be true until the jump button is released
+                jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
+            }
+            else if (onGround)                                                   // check if the player is jumping from the ground
+            {
+                rbody.velocity += new Vector2(0, jumpForce);                    // apply a vertical force to make the player rise
+                launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall
+                jumping = true;                                                 // 'jumping' will be true until the jump button is released
+                jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
+            }
+            else if (onPlayer)                                              // check if the player is jumping off the top of another player
+            {
+                rbody.velocity += new Vector2(0, jumpForce * 0.75f);            // apply a reduced vertical force to make the player rise
+                launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall                                      
+                goomba.velocity += new Vector2(0, jumpForce * -0.5f);           // apply a force downwards on the player that has been jumped on
+                jumping = true;                                                 // 'jumping' will be true until the jump button is released
+                jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
+            }
+            onGround = false;                                               // player is not grounded,
+            onPlayer = false;                                               // player is not on top of another player,
+            onWall = 0;                                                     // player is not on a wall.
+        }
+        else if (Input.GetButtonUp(player + "BtnA"))                    // check if the jump button has been released
+        {
+            jumping = false;                                                // set jumping to false, to indicate that the jump button is not being pressed
+        }
+        else if (jumping)                                               // check if the jump button is still pressed
+        {
+            if (jumpCharge > 0)                                             // check if the player is should still be gaining force from the jump
+            {
+                rbody.velocity += new Vector2(0, jumpForce * 3 * Time.deltaTime);   // add the extra jump force for keeping the button pressed
+                jumpCharge -= Time.deltaTime;                                   // reduce the time remaining on jumpCharge
+            }
+        }
+    }
+
+    void CheckBoostButton()
+    {
+        if (Input.GetButtonDown(player + "RightBumper") && wingBoostCount < wingBoostMax)                       // check if the jump button has been pressed
+        {
+            wingXVal = inputXAxis * wingForce;
+            wingYVal = -inputYAxis * wingForce;
+            if (wingYVal > 0)
+                wingYVal *= 1.25f;
+            rbody.velocity = new Vector2(wingXVal, wingYVal);
+            launchBuffer = 0.2f;
+            wingCharge = 0.25f;
+            wingBoostCount++;
+            if (wingBoostAura != null)
+                Destroy(wingBoostAura);
+            wingBoostAura = (GameObject)Instantiate(Resources.Load("WingBoostAura"), transform.position, transform.rotation);
+            (wingBoostAura.GetComponent<WingBoostAura>()).parent = gameObject;
+        }
+        else if (wingCharge > 0)                                             // check if the player is should still be gaining force from the jump
+        {
+            wingXVal = inputXAxis * wingForce * 5f * Time.deltaTime;
+            wingYVal = -inputYAxis * wingForce * 5f * Time.deltaTime;
+            rbody.velocity += new Vector2(wingXVal, wingYVal);   // add the extra jump force for keeping the button pressed
+            wingCharge -= Time.deltaTime;                                     // reduce the time remaining on jumpCharge
+            if (wingCharge <= 0)
+            {
+                wingCharge = 0;
+                Destroy(wingBoostAura);
+            }
+        }
+    }
+
+    void CheckIfOnGround()                                                                  // checks if the player is on the ground
     {
         Vector2 groundCheckVec;                                                                 // vector to check a position below the player
         groundCheckVec = new Vector2(rbody.position.x, rbody.position.y - 0.15f);                // the position of the vector is only 0.1 below the centre of the player
@@ -188,7 +207,7 @@ public class GamepadInput : MonoBehaviour
             onGround = false;                                                                       // the player is ungrounded
 	}
 
-	void checkIfOnWall()                                                                    // checks if the player is on a wall
+	void CheckIfOnWall()                                                                    // checks if the player is on a wall
 	{
         onWall = 0;                                                                             // sets onWall to 0, indicating that the player is not on a wall. If the next two checks fail, this is the final value.
         Vector2 wallCheckVec;                                                                   // vector to check a position to the side of the player
@@ -206,7 +225,7 @@ public class GamepadInput : MonoBehaviour
         }
     }
 	
-	void checkIfOnPlayer()                                                                  // checks if the player is on another player
+	void CheckIfOnPlayer()                                                                  // checks if the player is on another player
 	{
         Vector2 playerCheckVec;                                                                 // vector to check a position below the player
         playerCheckVec = new Vector2(rbody.position.x, rbody.position.y - 0.1f);                // same position as the groundCheckVec

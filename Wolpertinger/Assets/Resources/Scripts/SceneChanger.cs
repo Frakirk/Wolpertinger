@@ -8,6 +8,11 @@ public class SceneChanger : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        GoToNextScene();
+    }
+
+    public void GoToNextScene()
+    {
         SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
     }
 }

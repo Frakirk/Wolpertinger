@@ -21,7 +21,7 @@ public class LevelGenerator : MonoBehaviour {
     }
 	
 	void Update () {
-        if (gameCamera.transform.position.y > transform.position.y + 60)
+        if (gameCamera.transform.position.y > transform.position.y + 80)
             Destroy(gameObject);
 	}
 
@@ -30,7 +30,11 @@ public class LevelGenerator : MonoBehaviour {
         if (nextModuleGenerated)
             return;
         nextModuleGenerated = true;
-        Instantiate(Modules[Random.Range(0, Modules.Length)], nextModPos, transform.rotation);
-
+        var module = (GameObject)Instantiate(Modules[Random.Range(0, Modules.Length)], nextModPos, transform.rotation);
+        if (Random.value < 0.5f)
+        {
+            module.transform.localScale = new Vector3(module.transform.localScale.x*-1, module.transform.localScale.y, module.transform.localScale.z);
+            Debug.Log("REVERSO");
+        }
     }
 }
