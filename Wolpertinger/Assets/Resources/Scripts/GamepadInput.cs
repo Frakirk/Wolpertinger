@@ -55,7 +55,17 @@ public class GamepadInput : MonoBehaviour
             return;
 
 		inputXAxis = Input.GetAxis (player + "LeftAxisX");       // between -1 and +1
-		inputYAxis = Input.GetAxis(player + "LeftAxisY");        // between -1 and +1
+		inputYAxis = Input.GetAxis (player + "LeftAxisY");        // between -1 and +1
+        if (player == "P3" || player == "P4")
+        {
+            inputXAxis += Input.GetAxisRaw(player + "KbAxisX");
+            inputYAxis += Input.GetAxisRaw(player + "KbAxisY");
+            if (Input.GetButton(player + "KbAxisX") && Input.GetButton(player + "KbAxisY"))
+            {
+                inputXAxis *= 0.7071f;
+                inputYAxis *= 0.7071f;
+            }
+        }
         //inputRTrigger = Input.GetAxis(player + "RightTrigger");  // between 0 and +1
 
 		if (inputXAxis > 0)                                                         // check if the player is holding the stick right
@@ -112,6 +122,10 @@ public class GamepadInput : MonoBehaviour
             if ((onWall > 0 && inputXAxis > 0) || (onWall < 0 && inputXAxis < 0))       // check if the analogue stick is pointing towards the wall the player is on
                 rbody.drag = Mathf.Abs(inputXAxis) * 20;                                    // set the drag value according to how far to the side the analogue stick is held
         }
+
+        Debug.Log(rbody.velocity.y);
+        if (rbody.velocity.y > 20)
+            rbody.velocity = new Vector2(rbody.velocity.x, 20);
     }
     //-----------------------------------END OF Update()---------------------------------------------------
     

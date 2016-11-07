@@ -45,6 +45,9 @@ public class PauseMenuController : MonoBehaviour {
     void checkForInputs(int pID)
     {
         inputYAxis[pID] = Input.GetAxis("P"+(pID+1)+"LeftAxisY");
+        if (pID >= 2)
+            inputYAxis[pID] += Input.GetAxisRaw("P" + (pID + 1) + "KbAxisY");
+
         if (inputYAxis[pID] > 0.5 && inputYAxisLast[pID] <= 0.5)
         {
             currentButton++;
