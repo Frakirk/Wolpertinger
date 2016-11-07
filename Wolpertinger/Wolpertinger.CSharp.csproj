@@ -78,9 +78,12 @@
     <Compile Include="Assets\Resources\Scripts\Killzone.cs" />
     <Compile Include="Assets\Resources\Scripts\LevelGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\MenuManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\Parallax.cs" />
+    <Compile Include="Assets\Resources\Scripts\ParallaxGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\PauseMenuController.cs" />
     <Compile Include="Assets\Resources\Scripts\PlayerPusher.cs" />
     <Compile Include="Assets\Resources\Scripts\SceneChanger.cs" />
+    <Compile Include="Assets\Resources\Scripts\SceneryGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\WingBoostAura.cs" />
   </ItemGroup>
   <ItemGroup>

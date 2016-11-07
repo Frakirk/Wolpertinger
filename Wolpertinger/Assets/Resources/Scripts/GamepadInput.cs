@@ -123,7 +123,7 @@ public class GamepadInput : MonoBehaviour
                 rbody.drag = Mathf.Abs(inputXAxis) * 20;                                    // set the drag value according to how far to the side the analogue stick is held
         }
 
-        Debug.Log(rbody.velocity.y);
+        //Debug.Log(rbody.velocity.y);
         if (rbody.velocity.y > 20)
             rbody.velocity = new Vector2(rbody.velocity.x, 20);
     }
