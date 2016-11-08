@@ -35,6 +35,9 @@ public class GamepadInput : MonoBehaviour
 	private Rigidbody2D rbody;
 	private CircleCollider2D circleCol;
 
+    private Animator animator;
+    private float animLock;
+
 	void Start () 
 	{
 		rbody = GetComponent<Rigidbody2D>();
@@ -44,10 +47,17 @@ public class GamepadInput : MonoBehaviour
         jumping = false;
         //wingBoosting = false;
         wingBoostCount = 0;
+        animator = GetComponent<Animator>();
+        animLock = 0;
 	}
 
 	void Update () 
 	{
+        if (animator.speed != 1)
+            animator.speed = 1;
+        if (animLock > 0)
+            animLock -= Time.deltaTime;
+
         if (Input.GetButtonDown(player + "Start"))
             gameManager.PauseGame();
 
@@ -70,6 +80,8 @@ public class GamepadInput : MonoBehaviour
 
 		if (inputXAxis > 0)                                                         // check if the player is holding the stick right
 		{
+            if (animator.GetInteger("AnimState") != 6)
+                transform.localScale = new Vector3(1, 1, 1);
 			if (rbody.velocity.x < runSpeedMax)                                         // check if they are moving slower than their max speed
 			{
 				rbody.velocity += new Vector2 (inputXAxis * runSpeedAccel, 0);              // accelerate the player
@@ -79,13 +91,22 @@ public class GamepadInput : MonoBehaviour
 		}
 		else if (inputXAxis < 0)                                                    // check if the player is holding the stick left
 		{
-			if (rbody.velocity.x > -runSpeedMax)                                        // check if they are moving slower than their max speed
+            if (animator.GetInteger("AnimState") != 6)
+                transform.localScale = new Vector3(-1, 1, 1);
+            if (rbody.velocity.x > -runSpeedMax)                                        // check if they are moving slower than their max speed
 			{
 				rbody.velocity += new Vector2(inputXAxis * runSpeedAccel, 0);               // accelerate the player
                 if (rbody.velocity.x < -runSpeedMax)                                        // check if they are now moving faster than their max speed
 					rbody.velocity = new Vector2 (-runSpeedMax, rbody.velocity.y);              // set their speed to the maximum
 			}
 		}
+        else if (rbody.velocity.x != 0 && animator.GetInteger("AnimState") < 5)
+        {
+            if (rbody.velocity.x < -0.1)
+                transform.localScale = new Vector3(-1, 1, 1);
+            else if (rbody.velocity.x > 0.1)
+                transform.localScale = new Vector3(1, 1, 1);
+        }
 
         //check what surfaces the player is in contact with
         if (launchBuffer == 0)  // check if the launchBuffer isn't active
@@ -98,6 +119,15 @@ public class GamepadInput : MonoBehaviour
         CheckJumpButton();
 
         CheckBoostButton();
+
+        if (!onGround && !onPlayer && onWall == 0)
+        {
+
+            if (rbody.velocity.y < 0)
+                animator.SetInteger("AnimState", 3);
+
+        }
+
 
         if (launchBuffer > 0)                   // check if there is time remaining on launchBuffer
 		{
@@ -136,13 +166,14 @@ public class GamepadInput : MonoBehaviour
 
             if (onWall != 0)                                           // check if the player is jumping off the side of a wall
             {
-                rbody.velocity += new Vector2(onWall * -7.5f, jumpForce * 1.5f);  // apply a force that pushes the player upwards and horizontally away from the wall
+                rbody.velocity += new Vector2(onWall * -10, jumpForce * 1.5f);  // apply a force that pushes the player upwards and horizontally away from the wall
                 launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall
                 rsaStore = runSpeedAccel;                                       // store the value of runSpeedAccel
                 runSpeedAccel = 0;                                              // set runSpeedAccel to 0, preventing the player from accelerating horizontally
                 wjMoveDamper = 0.2f;                                            // set the amount of time until runSpeedAccel is returned to its original value
                 jumping = true;                                                 // 'jumping' will be true until the jump button is released
                 jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
+                animator.SetInteger("AnimState", 6);
             }
             else if (onGround)                                                   // check if the player is jumping from the ground
             {
@@ -150,14 +181,16 @@ public class GamepadInput : MonoBehaviour
                 launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall
                 jumping = true;                                                 // 'jumping' will be true until the jump button is released
                 jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
+                animator.SetInteger("AnimState", 2);
             }
             else if (onPlayer)                                              // check if the player is jumping off the top of another player
             {
-                rbody.velocity += new Vector2(0, jumpForce * 0.75f);            // apply a reduced vertical force to make the player rise
+                rbody.velocity += new Vector2(0, jumpForce);            // apply a reduced vertical force to make the player rise
                 launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall                                      
                 goomba.velocity += new Vector2(0, jumpForce * -0.5f);           // apply a force downwards on the player that has been jumped on
                 jumping = true;                                                 // 'jumping' will be true until the jump button is released
                 jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
+                animator.SetInteger("AnimState", 2);
             }
             onGround = false;                                               // player is not grounded,
             onPlayer = false;                                               // player is not on top of another player,
@@ -193,9 +226,17 @@ public class GamepadInput : MonoBehaviour
                 Destroy(wingBoostAura);
             wingBoostAura = (GameObject)Instantiate(Resources.Load("WingBoostAura"), transform.position, transform.rotation);
             (wingBoostAura.GetComponent<WingBoostAura>()).parent = gameObject;
+            animator.SetInteger("AnimState", 7);
+            animLock = wingCharge;
         }
         else if (wingCharge > 0)                                             // check if the player is should still be gaining force from the jump
         {
+            if (rbody.velocity != Vector2.zero)
+            {
+                float angle = Mathf.Atan2(rbody.velocity.y, Mathf.Abs(rbody.velocity.x)) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                Debug.Log(transform.rotation);
+            }
             wingXVal = inputXAxis * wingForce * 5f * Time.deltaTime;
             wingYVal = -inputYAxis * wingForce * 5f * Time.deltaTime;
             rbody.velocity += new Vector2(wingXVal, wingYVal);   // add the extra jump force for keeping the button pressed
@@ -204,6 +245,7 @@ public class GamepadInput : MonoBehaviour
             {
                 wingCharge = 0;
                 Destroy(wingBoostAura);
+                transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
             }
         }
     }
@@ -216,6 +258,7 @@ public class GamepadInput : MonoBehaviour
         {
             onGround = true;                                                                        // the player is ground
             wingBoostCount = 0;
+            AnimateGrounded();
         }
         else                                                                                    // else
             onGround = false;                                                                       // the player is ungrounded
@@ -226,16 +269,26 @@ public class GamepadInput : MonoBehaviour
         onWall = 0;                                                                             // sets onWall to 0, indicating that the player is not on a wall. If the next two checks fail, this is the final value.
         Vector2 wallCheckVec;                                                                   // vector to check a position to the side of the player
         wallCheckVec = new Vector2(rbody.position.x + (circleCol.radius)*-1, rbody.position.y); // the position of the vector is to the player's left
-        if (Physics2D.OverlapCircle(wallCheckVec, 0.15f, 1 << 8, 0f, 0f) != null)               // using a small circle collider, check for a wall to the player's left (WALL CHECK 1)
+        var wallCollider = Physics2D.OverlapCircle(wallCheckVec, 0.15f, 1 << 8, 0f, 0f);
+        if (wallCollider != null )               // using a small circle collider, check for a wall to the player's left (WALL CHECK 1)
         {
-            onWall = -1;                                                                            // set onWall to -1, indicating a wall to the left
-            wingBoostCount = 0;
+            if (wallCollider.gameObject.tag != "Jumpthru")
+            {
+                onWall = -1;                                                                            // set onWall to -1, indicating a wall to the left
+                wingBoostCount = 0;
+                animator.SetInteger("AnimState", 5);
+            }
         }
         wallCheckVec = new Vector2(rbody.position.x + (circleCol.radius), rbody.position.y);    // the position of the vector is now to the player's right
-        if (Physics2D.OverlapCircle(wallCheckVec, 0.15f, 1 << 8, 0f, 0f) != null)               // circle collider check to the right (WALL CHECK 2)
+        wallCollider = Physics2D.OverlapCircle(wallCheckVec, 0.15f, 1 << 8, 0f, 0f);
+        if (wallCollider != null)               // circle collider check to the right (WALL CHECK 2)
         {
-            onWall = 1;                                                                             // set onWall to 1, indicating a wall to the right
-            wingBoostCount = 0;
+            if (wallCollider.gameObject.tag != "Jumpthru")
+            {
+                onWall = 1;                                                                             // set onWall to 1, indicating a wall to the right
+                wingBoostCount = 0;
+                animator.SetInteger("AnimState", 5);
+            }
         }
     }
 	
@@ -250,11 +303,30 @@ public class GamepadInput : MonoBehaviour
 			onPlayer = true;                                                                        // the player is on another player
 			goomba = goombaList[0].GetComponent<Rigidbody2D>();                                     // keep a reference to the first colliding player on the list (couldn't think of a better variable name sorry) 
             wingBoostCount = 0;
+            AnimateGrounded();
         }
 		else                                                                                    // else
 			onPlayer = false;                                                                       // the player is not on another player
 		transform.position -= new Vector3(9999, 9999, 9999);                                    //bring the player back from the far off place they were sent to
 	}
+
+    void AnimateGrounded()
+    {
+        if (animLock > 0)
+            return;
+        if (animator.GetInteger("AnimState") == 3)
+        {
+            animator.SetInteger("AnimState", 4);
+            animLock = 0.1f;
+        }
+        else if (Mathf.Abs(rbody.velocity.x) > 0.1)
+        {
+            animator.SetInteger("AnimState", 1);
+            animator.speed = Mathf.Abs(rbody.velocity.x) / 8;
+        }
+        else
+            animator.SetInteger("AnimState", 0);
+    }
 }
 
 // ------------------------------------------------------- OLD CHARGE-JUMP CODE ---------------------------------

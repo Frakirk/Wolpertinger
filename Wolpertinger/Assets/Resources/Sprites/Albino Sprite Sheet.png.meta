@@ -1,0 +1,437 @@
+fileFormatVersion: 2
+guid: 2171e455eb3b6d84f884c23077ec0589
+timeCreated: 1478602878
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: albino walljump 4
+    21300002: albino walljump 3
+    21300004: albino walljump 2
+    21300006: albino walljump 1
+    21300008: Wolpertinger_sprite_sheet_ALBINO_originalsize_4
+    21300010: Wolpertinger_sprite_sheet_ALBINO_originalsize_5
+    21300012: albino wingboost
+    21300014: Wolpertinger_sprite_sheet_ALBINO_originalsize_8
+    21300016: albino wallcling 1
+    21300018: albino wallcling 2
+    21300020: Wolpertinger_sprite_sheet_ALBINO_originalsize_13
+    21300022: Wolpertinger_sprite_sheet_ALBINO_originalsize_14
+    21300024: Wolpertinger_sprite_sheet_ALBINO_originalsize_15
+    21300026: Wolpertinger_sprite_sheet_ALBINO_originalsize_16
+    21300028: Wolpertinger_sprite_sheet_ALBINO_originalsize_17
+    21300030: albino jump 3
+    21300032: albino jump 4
+    21300034: albino jump 5
+    21300036: Wolpertinger_sprite_sheet_ALBINO_originalsize_21
+    21300038: albino jump 6
+    21300040: albino jump 1
+    21300042: albino jump 2
+    21300044: albino jump 7
+    21300046: Wolpertinger_sprite_sheet_ALBINO_originalsize_26
+    21300048: albino idle
+    21300050: albino walk 1
+    21300052: albino walk 2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 150
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: albino walljump 4
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 2503
+        width: 350
+        height: 353
+      alignment: 9
+      pivot: {x: 0.3418063, y: 0.56273997}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino walljump 3
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 2449
+        width: 356
+        height: 352
+      alignment: 9
+      pivot: {x: 0.43778905, y: 0.5157297}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino walljump 2
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 2412
+        width: 384
+        height: 455
+      alignment: 9
+      pivot: {x: 0.64181834, y: 0.3924279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino walljump 1
+      rect:
+        serializedVersion: 2
+        x: 1930
+        y: 2199
+        width: 455
+        height: 428
+      alignment: 9
+      pivot: {x: 0.7886831, y: 0.44976464}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wolpertinger_sprite_sheet_ALBINO_originalsize_4
+      rect:
+        serializedVersion: 2
+        x: 1463
+        y: 2321
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wolpertinger_sprite_sheet_ALBINO_originalsize_5
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 2305
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino wingboost
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 1846
+        width: 410
+        height: 411
+      alignment: 9
+      pivot: {x: 0.59032446, y: 0.5214535}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wolpertinger_sprite_sheet_ALBINO_originalsize_8
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 1921
+        width: 444
+        height: 288
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino wallcling 1
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 1723
+        width: 309
+        height: 365
+      alignment: 9
+      pivot: {x: 0.5276728, y: 0.3633428}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino wallcling 2
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 1663
+        width: 266
+        height: 301
+      alignment: 9
+      pivot: {x: 0.7560457, y: 0.5946933}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wolpertinger_sprite_sheet_ALBINO_originalsize_13
+      rect:
+        serializedVersion: 2
+        x: 2250
+        y: 1960
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wolpertinger_sprite_sheet_ALBINO_originalsize_14
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 1915
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wolpertinger_sprite_sheet_ALBINO_originalsize_15
+      rect:
+        serializedVersion: 2
+        x: 1716
+        y: 1035
+        width: 321
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wolpertinger_sprite_sheet_ALBINO_originalsize_16
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 1129
+        width: 327
+        height: 288
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wolpertinger_sprite_sheet_ALBINO_originalsize_17
+      rect:
+        serializedVersion: 2
+        x: 2528
+        y: 1142
+        width: 303
+        height: 461
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino jump 3
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 574
+        width: 384
+        height: 405
+      alignment: 9
+      pivot: {x: 0.6764752, y: 0.27318206}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino jump 4
+      rect:
+        serializedVersion: 2
+        x: 1348
+        y: 662
+        width: 301
+        height: 252
+      alignment: 9
+      pivot: {x: 0.6050644, y: 0.26096454}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino jump 5
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 571
+        width: 323
+        height: 267
+      alignment: 9
+      pivot: {x: 0.63054454, y: 0.3984768}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wolpertinger_sprite_sheet_ALBINO_originalsize_21
+      rect:
+        serializedVersion: 2
+        x: 2030
+        y: 712
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino jump 6
+      rect:
+        serializedVersion: 2
+        x: 2095
+        y: 390
+        width: 323
+        height: 497
+      alignment: 9
+      pivot: {x: 0.618867, y: 0.20433624}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino jump 1
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 134
+        width: 292
+        height: 369
+      alignment: 9
+      pivot: {x: 0.6083025, y: 0.5367289}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino jump 2
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 341
+        width: 321
+        height: 331
+      alignment: 9
+      pivot: {x: 0.6032097, y: 0.61373985}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino jump 7
+      rect:
+        serializedVersion: 2
+        x: 2479
+        y: 134
+        width: 258
+        height: 353
+      alignment: 9
+      pivot: {x: 0.5193865, y: 0.3250908}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wolpertinger_sprite_sheet_ALBINO_originalsize_26
+      rect:
+        serializedVersion: 2
+        x: 2733
+        y: 411
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino idle
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 134
+        width: 343
+        height: 208
+      alignment: 9
+      pivot: {x: 0.5643905, y: 0.3220792}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino walk 1
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 133
+        width: 319
+        height: 225
+      alignment: 9
+      pivot: {x: 0.56, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: albino walk 2
+      rect:
+        serializedVersion: 2
+        x: 1627
+        y: 133
+        width: 320
+        height: 221
+      alignment: 9
+      pivot: {x: 0.56, y: 0.38}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
