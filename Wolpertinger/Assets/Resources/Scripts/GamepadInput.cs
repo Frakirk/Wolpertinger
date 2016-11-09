@@ -124,7 +124,9 @@ public class GamepadInput : MonoBehaviour
         {
 
             if (rbody.velocity.y < 0)
-                animator.SetInteger("AnimState", 3);
+                ChangeAnim(3);
+            else
+                ChangeAnim(8);
 
         }
 
@@ -168,12 +170,16 @@ public class GamepadInput : MonoBehaviour
             {
                 rbody.velocity += new Vector2(onWall * -10, jumpForce * 1.5f);  // apply a force that pushes the player upwards and horizontally away from the wall
                 launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall
-                rsaStore = runSpeedAccel;                                       // store the value of runSpeedAccel
-                runSpeedAccel = 0;                                              // set runSpeedAccel to 0, preventing the player from accelerating horizontally
-                wjMoveDamper = 0.2f;                                            // set the amount of time until runSpeedAccel is returned to its original value
+                if (runSpeedAccel > 0)
+                {
+                    rsaStore = runSpeedAccel;                                       // store the value of runSpeedAccel
+                    runSpeedAccel = 0;                                              // set runSpeedAccel to 0, preventing the player from accelerating horizontally
+                    wjMoveDamper = 0.25f;                                            // set the amount of time until runSpeedAccel is returned to its original value
+                }
                 jumping = true;                                                 // 'jumping' will be true until the jump button is released
                 jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
-                animator.SetInteger("AnimState", 6);
+                ChangeAnim(6);
+                animLock = 0.25f;
             }
             else if (onGround)                                                   // check if the player is jumping from the ground
             {
@@ -181,7 +187,8 @@ public class GamepadInput : MonoBehaviour
                 launchBuffer = 0.2f;                                            // set the launch buffer for 0.2s, preventing the checks that set onGround/onPlayer/onWall
                 jumping = true;                                                 // 'jumping' will be true until the jump button is released
                 jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
-                animator.SetInteger("AnimState", 2);
+                ChangeAnim(2);
+                animLock = 0.25f;
             }
             else if (onPlayer)                                              // check if the player is jumping off the top of another player
             {
@@ -190,7 +197,8 @@ public class GamepadInput : MonoBehaviour
                 goomba.velocity += new Vector2(0, jumpForce * -0.5f);           // apply a force downwards on the player that has been jumped on
                 jumping = true;                                                 // 'jumping' will be true until the jump button is released
                 jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
-                animator.SetInteger("AnimState", 2);
+                ChangeAnim(2);
+                animLock = 0.25f;
             }
             onGround = false;                                               // player is not grounded,
             onPlayer = false;                                               // player is not on top of another player,
@@ -219,14 +227,15 @@ public class GamepadInput : MonoBehaviour
             if (wingYVal > 0)
                 wingYVal *= 1.25f;
             rbody.velocity = new Vector2(wingXVal, wingYVal);
-            launchBuffer = 0.2f;
+            //launchBuffer = 0.2f;
             wingCharge = 0.25f;
             wingBoostCount++;
             if (wingBoostAura != null)
                 Destroy(wingBoostAura);
             wingBoostAura = (GameObject)Instantiate(Resources.Load("WingBoostAura"), transform.position, transform.rotation);
             (wingBoostAura.GetComponent<WingBoostAura>()).parent = gameObject;
-            animator.SetInteger("AnimState", 7);
+            animLock = 0;
+            ChangeAnim(7);
             animLock = wingCharge;
         }
         else if (wingCharge > 0)                                             // check if the player is should still be gaining force from the jump
@@ -235,7 +244,7 @@ public class GamepadInput : MonoBehaviour
             {
                 float angle = Mathf.Atan2(rbody.velocity.y, Mathf.Abs(rbody.velocity.x)) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                Debug.Log(transform.rotation);
+                //Debug.Log(transform.rotation);
             }
             wingXVal = inputXAxis * wingForce * 5f * Time.deltaTime;
             wingYVal = -inputYAxis * wingForce * 5f * Time.deltaTime;
@@ -274,9 +283,24 @@ public class GamepadInput : MonoBehaviour
         {
             if (wallCollider.gameObject.tag != "Jumpthru")
             {
-                onWall = -1;                                                                            // set onWall to -1, indicating a wall to the left
-                wingBoostCount = 0;
-                animator.SetInteger("AnimState", 5);
+                //if (wingCharge > 0)
+                //{
+                //    Debug.Log("Bounce!");
+                //    wingCharge = 0.01f;
+                //    rbody.velocity += new Vector2(10, rbody.velocity.y);
+                //    if (runSpeedAccel > 0)
+                //    {
+                //        rsaStore = runSpeedAccel;                                       // store the value of runSpeedAccel
+                //        runSpeedAccel = 0;                                              // set runSpeedAccel to 0, preventing the player from accelerating horizontally
+                //        wjMoveDamper = 0.2f;                                            // set the amount of time until runSpeedAccel is returned to its original value
+                //    }
+                //}
+                //else
+                //{
+                    onWall = -1;                                                                            // set onWall to -1, indicating a wall to the left
+                    wingBoostCount = 0;
+                    ChangeAnim(5);
+                //}
             }
         }
         wallCheckVec = new Vector2(rbody.position.x + (circleCol.radius), rbody.position.y);    // the position of the vector is now to the player's right
@@ -285,9 +309,24 @@ public class GamepadInput : MonoBehaviour
         {
             if (wallCollider.gameObject.tag != "Jumpthru")
             {
-                onWall = 1;                                                                             // set onWall to 1, indicating a wall to the right
-                wingBoostCount = 0;
-                animator.SetInteger("AnimState", 5);
+                //if (wingCharge > 0)
+                //{
+                //    Debug.Log("Bounce!");
+                //    wingCharge = 0.01f;
+                //    rbody.velocity = new Vector2(-10, rbody.velocity.y);
+                //    if (runSpeedAccel > 0)
+                //    {
+                //        rsaStore = runSpeedAccel;                                       // store the value of runSpeedAccel
+                //        runSpeedAccel = 0;                                              // set runSpeedAccel to 0, preventing the player from accelerating horizontally
+                //        wjMoveDamper = 0.2f;                                            // set the amount of time until runSpeedAccel is returned to its original value
+                //    }
+                //}
+                //else
+                //{
+                    onWall = 1;                                                                             // set onWall to 1, indicating a wall to the right
+                    wingBoostCount = 0;
+                    ChangeAnim(5);
+                //}
             }
         }
     }
@@ -316,18 +355,28 @@ public class GamepadInput : MonoBehaviour
             return;
         if (animator.GetInteger("AnimState") == 3)
         {
-            animator.SetInteger("AnimState", 4);
+            ChangeAnim(4);
             animLock = 0.1f;
         }
         else if (Mathf.Abs(rbody.velocity.x) > 0.1)
         {
-            animator.SetInteger("AnimState", 1);
+            ChangeAnim(1);
             animator.speed = Mathf.Abs(rbody.velocity.x) / 8;
         }
         else
-            animator.SetInteger("AnimState", 0);
+            ChangeAnim(0);
     }
+
+    void ChangeAnim(int state)
+    {
+        if (animLock > 0)
+            return;
+        animator.SetInteger("AnimState", state);
+    }
+
 }
+
+
 
 // ------------------------------------------------------- OLD CHARGE-JUMP CODE ---------------------------------
 //      if (Input.GetButtonDown(player + "BtnA"))

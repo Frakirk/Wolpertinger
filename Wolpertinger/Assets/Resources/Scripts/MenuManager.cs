@@ -23,6 +23,8 @@ public class MenuManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if (Input.GetButtonDown("Escape"))
+            Application.Quit();
         if (gmScript.gamePaused)
             return;
         for (int i = 0; i < 4; i++)
@@ -32,6 +34,7 @@ public class MenuManager : MonoBehaviour {
             if (Input.GetButtonDown("P" + (i + 1).ToString() + "BtnB") && players[i] != null)
                 players[i] = DestroyPlayer(i, players[i]);
         }
+
 
     }
 
