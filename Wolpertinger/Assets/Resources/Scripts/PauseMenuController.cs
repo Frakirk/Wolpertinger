@@ -48,17 +48,17 @@ public class PauseMenuController : MonoBehaviour {
         if (pID >= 2)
             inputYAxis[pID] += Input.GetAxisRaw("P" + (pID + 1) + "KbAxisY");
 
-        if (inputYAxis[pID] > 0.5 && inputYAxisLast[pID] <= 0.5)
+        if (inputYAxis[pID] > 0.5 && inputYAxisLast[pID] <= 0.5 && currentButton < numButtons-1)
         {
             currentButton++;
-            if (currentButton >= numButtons)
-                currentButton = 0;
+            //if (currentButton >= numButtons)
+            //    currentButton = 0;
         }
-        if (inputYAxis[pID] < -0.5 && inputYAxisLast[pID] >= -0.5)
+        if (inputYAxis[pID] < -0.5 && inputYAxisLast[pID] >= -0.5 && currentButton > 0)
         {
             currentButton--;
-            if (currentButton < 0)
-                currentButton = numButtons - 1;
+            //if (currentButton < 0)
+            //    currentButton = numButtons - 1;
         }
         buttonHighlight.position = buttons[currentButton].position;
         inputYAxisLast[pID] = inputYAxis[pID];
