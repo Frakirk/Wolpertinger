@@ -8,9 +8,10 @@ public class MenuManager : MonoBehaviour {
     public GameObject[] players;
     public CameraPosScale CameraScript;
     public RuntimeAnimatorController sable;
+    public RuntimeAnimatorController sealpoint;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         players = new GameObject[4];
         for (int i = 0; i < 4; i++)
@@ -46,6 +47,8 @@ public class MenuManager : MonoBehaviour {
         player.GetComponent<GamepadInput>().player = 'P' + playerID.ToString();
         if (playerID == 2)
             player.GetComponent<Animator>().runtimeAnimatorController = sable;
+        if (playerID == 3)
+            player.GetComponent<Animator>().runtimeAnimatorController = sealpoint;
         player.tag = "Player" + playerID.ToString();
         gmScript.players[playerID-1] = true;
         CameraScript.CountPlayers();

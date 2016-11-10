@@ -1,0 +1,451 @@
+fileFormatVersion: 2
+guid: 13df9ae93c06ee64d993f4d08e16dfed
+timeCreated: 1478814182
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Sealpoint walljump 4
+    21300002: Sealpoint walljump 3
+    21300004: Sealpoint walljump 2
+    21300006: Sealpoint walljump 1
+    21300008: Sealpoint Sprite Sheet_4
+    21300010: Sealpoint Sprite Sheet_5
+    21300012: Sealpoint wingboost
+    21300014: Sealpoint Sprite Sheet_8
+    21300016: Sealpoint wallcling 1
+    21300018: Sealpoint Sprite Sheet_11
+    21300020: Sealpoint wallcling 2
+    21300022: Sealpoint Sprite Sheet_13
+    21300024: Sealpoint Sprite Sheet_14
+    21300026: Sealpoint Sprite Sheet_15
+    21300028: Sealpoint Sprite Sheet_16
+    21300030: Sealpoint Sprite Sheet_17
+    21300032: Sealpoint jump 3
+    21300034: Sealpoint jump 4
+    21300036: Sealpoint jump 5
+    21300038: Sealpoint Sprite Sheet_21
+    21300040: Sealpoint jump 6
+    21300042: Sealpoint jump 1
+    21300044: Sealpoint jump 2
+    21300046: Sealpoint jump 7
+    21300048: Sealpoint Sprite Sheet_26
+    21300050: Sealpoint idle
+    21300052: Sealpoint walk 1
+    21300054: Sealpoint walk 2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 150
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sealpoint walljump 4
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 2502
+        width: 350
+        height: 354
+      alignment: 9
+      pivot: {x: 0.3468499, y: 0.53154653}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint walljump 3
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 2449
+        width: 356
+        height: 352
+      alignment: 9
+      pivot: {x: 0.28035608, y: 0.49305865}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint walljump 2
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 2412
+        width: 387
+        height: 455
+      alignment: 9
+      pivot: {x: 0.5915537, y: 0.37916595}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint walljump 1
+      rect:
+        serializedVersion: 2
+        x: 1930
+        y: 2197
+        width: 455
+        height: 430
+      alignment: 9
+      pivot: {x: 0.76852036, y: 0.47158715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 1463
+        y: 2321
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 2305
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint wingboost
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 1845
+        width: 363
+        height: 373
+      alignment: 9
+      pivot: {x: 0.70304006, y: 0.5958046}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 1922
+        width: 440
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint wallcling 1
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 1725
+        width: 309
+        height: 363
+      alignment: 9
+      pivot: {x: 0.55535513, y: 0.34517616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 1961
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint wallcling 2
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 1662
+        width: 266
+        height: 300
+      alignment: 9
+      pivot: {x: 0.80773836, y: 0.6221773}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint Sprite Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 1960
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint Sprite Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 1915
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint Sprite Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 1718
+        y: 1035
+        width: 321
+        height: 426
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint Sprite Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 1129
+        width: 327
+        height: 288
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint Sprite Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 2528
+        y: 1142
+        width: 304
+        height: 463
+      alignment: 9
+      pivot: {x: 0.6326262, y: 0.14639974}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint jump 3
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 574
+        width: 385
+        height: 404
+      alignment: 9
+      pivot: {x: 0.7221398, y: 0.23387252}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint jump 4
+      rect:
+        serializedVersion: 2
+        x: 1348
+        y: 664
+        width: 301
+        height: 250
+      alignment: 9
+      pivot: {x: 0.65424335, y: 0.21655005}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint jump 5
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 571
+        width: 323
+        height: 267
+      alignment: 9
+      pivot: {x: 0.6588679, y: 0.33069167}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint Sprite Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 2030
+        y: 711
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint jump 6
+      rect:
+        serializedVersion: 2
+        x: 2096
+        y: 390
+        width: 323
+        height: 497
+      alignment: 9
+      pivot: {x: 0.613477, y: 0.17304824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint jump 1
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 134
+        width: 292
+        height: 369
+      alignment: 9
+      pivot: {x: 0.63807654, y: 0.57946515}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint jump 2
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 338
+        width: 321
+        height: 331
+      alignment: 9
+      pivot: {x: 0.6522453, y: 0.5885878}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint jump 7
+      rect:
+        serializedVersion: 2
+        x: 2478
+        y: 134
+        width: 258
+        height: 353
+      alignment: 9
+      pivot: {x: 0.5520909, y: 0.26464537}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint Sprite Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 2733
+        y: 411
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint idle
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 134
+        width: 343
+        height: 208
+      alignment: 9
+      pivot: {x: 0.6781002, y: 0.2709188}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint walk 1
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 133
+        width: 319
+        height: 225
+      alignment: 9
+      pivot: {x: 0.7029895, y: 0.33709806}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sealpoint walk 2
+      rect:
+        serializedVersion: 2
+        x: 1627
+        y: 133
+        width: 320
+        height: 221
+      alignment: 9
+      pivot: {x: 0.67562944, y: 0.35073474}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

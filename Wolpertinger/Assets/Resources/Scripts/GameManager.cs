@@ -9,9 +9,10 @@ public class GameManager : MonoBehaviour {
     public GameObject pauseScreenPrefab;
     public GameObject pauseScreenInstance;
     public RuntimeAnimatorController sable;
+    public RuntimeAnimatorController sealpoint;
     //public float hitstopTime;
 
-	void Awake () {
+    void Awake () {
         DontDestroyOnLoad(this.gameObject);
         players = new bool[4];
         gamePaused = false;
@@ -54,7 +55,8 @@ public class GameManager : MonoBehaviour {
                 player.GetComponent<GamepadInput>().player = 'P' + i.ToString();
                 if (i == 2)
                     player.GetComponent<Animator>().runtimeAnimatorController = sable;
-                
+                if (i == 3)
+                    player.GetComponent<Animator>().runtimeAnimatorController = sealpoint;
                 player.tag = "Player" + i.ToString();
             }
         }
