@@ -9,6 +9,8 @@ public class Killzone : MonoBehaviour {
     Transform cameraTransform;
     float startTime, currentTime;
     public float suddenDeathTime, RisingSpeed, victoryTimescale;
+    public AudioClip deathSqueal;
+    AudioSource audioSource;
 
     void Start()
     {
@@ -23,6 +25,7 @@ public class Killzone : MonoBehaviour {
                 numPlayersTotal++;
         }
         startTime = Time.time;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -45,6 +48,7 @@ public class Killzone : MonoBehaviour {
             Destroy(other.gameObject.GetComponent<Rigidbody2D>());
             Destroy(other.gameObject.GetComponent<CircleCollider2D>());
             other.gameObject.GetComponent<GamepadInput>().enabled = false;
+            audioSource.PlayOneShot(deathSqueal, 0.75f);
             //deadPlayers[numPlayersDead] = other.gameObject.GetComponent<Transform>();
             //Debug.Log("NEW DEAD GUY: " + deadPlayers[numPlayersDead]);
         }
