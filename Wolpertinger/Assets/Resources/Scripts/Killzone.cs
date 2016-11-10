@@ -6,7 +6,9 @@ public class Killzone : MonoBehaviour {
     //Transform[] deadPlayers;
     int numPlayersDead;
     int numPlayersTotal;
-    Transform cameraTransform;  
+    Transform cameraTransform;
+    float startTime, currentTime;
+    public float suddenDeathTime, RisingSpeed;
 
     void Start()
     {
@@ -20,12 +22,16 @@ public class Killzone : MonoBehaviour {
             if (playerBoolArray[i])
                 numPlayersTotal++;
         }
+        startTime = Time.time;
     }
 
     void Update()
     {
         if (numPlayersDead == numPlayersTotal - 1)
             Time.timeScale = 0.5f;
+        currentTime = Time.time - startTime;
+        if (currentTime > suddenDeathTime && Time.timeScale == 1)
+            transform.position += new Vector3(0,RisingSpeed);
     }
 
     void OnTriggerEnter2D(Collider2D other)
