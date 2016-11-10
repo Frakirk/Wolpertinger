@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LevelGenerator : MonoBehaviour {
 
-    public int nextModuleHeight;
+    public float nextModuleHeight;
     public int uniqueModules;
     public GameObject[] Modules;
 
@@ -31,7 +32,7 @@ public class LevelGenerator : MonoBehaviour {
             return;
         nextModuleGenerated = true;
         var module = (GameObject)Instantiate(Modules[Random.Range(0, Modules.Length)], nextModPos, transform.rotation);
-        if (Random.value < 0.5f)
+        if (Random.value < 0.5f && SceneManager.GetActiveScene().name != "Asgard")
         {
             module.transform.localScale = new Vector3(module.transform.localScale.x*-1, module.transform.localScale.y, module.transform.localScale.z);
             Debug.Log("REVERSO");
