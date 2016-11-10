@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour {
     public GameManager gmScript;
     public GameObject[] players;
     public CameraPosScale CameraScript;
+    public RuntimeAnimatorController sable;
 
 	// Use this for initialization
 	void Start ()
@@ -31,6 +32,7 @@ public class MenuManager : MonoBehaviour {
         {
             if (Input.GetButtonDown("P"+(i+1).ToString()+"Start") && players[i] == null)
                 players[i] = CreatePlayer(i + 1, new Vector2(transform.position.x + i * 2, transform.position.y));
+
             if (Input.GetButtonDown("P" + (i + 1).ToString() + "BtnB") && players[i] != null)
                 players[i] = DestroyPlayer(i, players[i]);
         }
@@ -42,6 +44,8 @@ public class MenuManager : MonoBehaviour {
     {
         var player = (GameObject)Instantiate(Resources.Load("Player"), playerPos, transform.rotation);
         player.GetComponent<GamepadInput>().player = 'P' + playerID.ToString();
+        if (playerID == 2)
+            player.GetComponent<Animator>().runtimeAnimatorController = sable;
         player.tag = "Player" + playerID.ToString();
         gmScript.players[playerID-1] = true;
         CameraScript.CountPlayers();

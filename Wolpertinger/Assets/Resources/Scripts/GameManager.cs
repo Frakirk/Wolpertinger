@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public bool gamePaused;
     public GameObject pauseScreenPrefab;
     public GameObject pauseScreenInstance;
+    public RuntimeAnimatorController sable;
     //public float hitstopTime;
 
 	void Awake () {
@@ -51,6 +52,9 @@ public class GameManager : MonoBehaviour {
                 var spawnPos = (GameObject.Find("p" + i.ToString() + "Spawn")).transform.position;
                 var player = (GameObject)Instantiate(Resources.Load("Player"), spawnPos, transform.rotation);
                 player.GetComponent<GamepadInput>().player = 'P' + i.ToString();
+                if (i == 2)
+                    player.GetComponent<Animator>().runtimeAnimatorController = sable;
+                
                 player.tag = "Player" + i.ToString();
             }
         }
