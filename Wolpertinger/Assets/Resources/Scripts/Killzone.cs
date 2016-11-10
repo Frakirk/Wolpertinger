@@ -8,7 +8,7 @@ public class Killzone : MonoBehaviour {
     int numPlayersTotal;
     Transform cameraTransform;
     float startTime, currentTime;
-    public float suddenDeathTime, RisingSpeed;
+    public float suddenDeathTime, RisingSpeed, victoryTimescale;
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class Killzone : MonoBehaviour {
     void Update()
     {
         if (numPlayersDead == numPlayersTotal - 1)
-            Time.timeScale = 0.5f;
+            Time.timeScale = victoryTimescale;
         currentTime = Time.time - startTime;
         if (currentTime > suddenDeathTime && Time.timeScale == 1)
             transform.position += new Vector3(0,RisingSpeed);
