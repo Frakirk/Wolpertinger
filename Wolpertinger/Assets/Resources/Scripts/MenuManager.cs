@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour {
     public CameraPosScale CameraScript;
     public RuntimeAnimatorController sable;
     public RuntimeAnimatorController sealpoint;
+    public RuntimeAnimatorController tawny;
 
     // Use this for initialization
     void Start ()
@@ -49,6 +50,8 @@ public class MenuManager : MonoBehaviour {
             player.GetComponent<Animator>().runtimeAnimatorController = sable;
         if (playerID == 3)
             player.GetComponent<Animator>().runtimeAnimatorController = sealpoint;
+        if (playerID == 4)
+            player.GetComponent<Animator>().runtimeAnimatorController = tawny;
         player.tag = "Player" + playerID.ToString();
         gmScript.players[playerID-1] = true;
         CameraScript.CountPlayers();

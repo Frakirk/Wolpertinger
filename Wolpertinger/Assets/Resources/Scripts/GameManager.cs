@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public GameObject pauseScreenInstance;
     public RuntimeAnimatorController sable;
     public RuntimeAnimatorController sealpoint;
+    public RuntimeAnimatorController tawny;
     //public float hitstopTime;
 
     void Awake () {
@@ -57,6 +58,8 @@ public class GameManager : MonoBehaviour {
                     player.GetComponent<Animator>().runtimeAnimatorController = sable;
                 if (i == 3)
                     player.GetComponent<Animator>().runtimeAnimatorController = sealpoint;
+                if (i == 4)
+                    player.GetComponent<Animator>().runtimeAnimatorController = tawny;
                 player.tag = "Player" + i.ToString();
             }
         }

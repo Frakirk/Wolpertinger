@@ -1,30 +1,18 @@
 5.4.1f1:2.3.0.0
 WebGL
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/Managed/UnityEngine.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/Managed/UnityEditor.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data\Managed/Mono.Cecil.dll
-G:\Downloads v.4\Unity 5.4.1 Install\Editor\Data\PlaybackEngines\AppleTVSupport\UnityEditor.iOS.Extensions.Common.dll
-G:\Downloads v.4\Unity 5.4.1 Install\Editor\Data\PlaybackEngines\AppleTVSupport\UnityEditor.iOS.Extensions.Xcode.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Common.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/UnityExtensions/Unity/EditorTestsRunner/Editor/nunit.framework.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/UnityExtensions/Unity/EditorTestsRunner/Editor/UnityEditor.EditorTestsRunner.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/Managed/UnityEditor.Graphs.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/AppleTVSupport/UnityEditor.AppleTV.Extensions.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.Metro.Extensions.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/TizenPlayer/UnityEditor.Tizen.Extensions.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/STVPlayer/UnityEditor.SamsungTV.Extensions.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll
-G:/Downloads v.4/Unity 5.4.1 Install/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll
+C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
+C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
+C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll
+C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll
+C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll
+C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/EditorTestsRunner/Editor/nunit.framework.dll
+C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/EditorTestsRunner/Editor/UnityEditor.EditorTestsRunner.dll
+C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll
+C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll
+C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll
+C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll
+C:/Program Files/Unity/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll
+C:/Program Files/Unity/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
 C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/2015/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll

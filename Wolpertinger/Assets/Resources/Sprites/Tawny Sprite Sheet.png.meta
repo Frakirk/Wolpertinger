@@ -1,0 +1,437 @@
+fileFormatVersion: 2
+guid: d44bff365bac0fa40980e9879df0d94e
+timeCreated: 1478816966
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Tawny walljump 4
+    21300002: Tawny walljump 3
+    21300004: Tawny walljump 2
+    21300006: Tawny walljump 1
+    21300008: Tawny Sprite Sheet_4
+    21300010: Tawny Sprite Sheet_5
+    21300012: Tawny wingboost
+    21300014: Tawny Sprite Sheet_8
+    21300016: Tawny wallcling 1
+    21300018: Tawny Sprite Sheet_11
+    21300020: Tawny wallcling 2
+    21300022: Tawny Sprite Sheet_13
+    21300024: Tawny Sprite Sheet_14
+    21300026: Tawny Sprite Sheet_15
+    21300028: Tawny Sprite Sheet_16
+    21300030: Tawny jump 3
+    21300032: Tawny jump 4
+    21300034: Tawny jump 5
+    21300036: Tawny Sprite Sheet_20
+    21300038: Tawny jump 6
+    21300040: Tawny jump 1
+    21300042: Tawny jump 2
+    21300044: Tawny jump 7
+    21300046: Tawny Sprite Sheet_25
+    21300048: Tawny idle
+    21300050: Tawny walk 1
+    21300052: Tawny walk 2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 150
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tawny walljump 4
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 2502
+        width: 350
+        height: 354
+      alignment: 9
+      pivot: {x: 0.31196114, y: 0.534859}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny walljump 3
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 2446
+        width: 356
+        height: 352
+      alignment: 9
+      pivot: {x: 0.28913313, y: 0.50584275}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny walljump 2
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 2412
+        width: 384
+        height: 455
+      alignment: 9
+      pivot: {x: 0.6097968, y: 0.37343535}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny walljump 1
+      rect:
+        serializedVersion: 2
+        x: 1928
+        y: 2197
+        width: 457
+        height: 430
+      alignment: 9
+      pivot: {x: 0.7272698, y: 0.46412778}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 2320
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 2305
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny wingboost
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 1845
+        width: 363
+        height: 373
+      alignment: 9
+      pivot: {x: 0.69102645, y: 0.5743621}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 1920
+        width: 440
+        height: 266
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny wallcling 1
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 1725
+        width: 309
+        height: 363
+      alignment: 9
+      pivot: {x: 0.5599033, y: 0.35269004}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 1961
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny wallcling 2
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 1662
+        width: 266
+        height: 305
+      alignment: 9
+      pivot: {x: 0.78155565, y: 0.57909757}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny Sprite Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 1914
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny Sprite Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 1717
+        y: 1035
+        width: 322
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny Sprite Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 1129
+        width: 327
+        height: 288
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny Sprite Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 2528
+        y: 1142
+        width: 304
+        height: 461
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny jump 3
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 574
+        width: 388
+        height: 404
+      alignment: 9
+      pivot: {x: 0.7220767, y: 0.24742973}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny jump 4
+      rect:
+        serializedVersion: 2
+        x: 1348
+        y: 664
+        width: 301
+        height: 248
+      alignment: 9
+      pivot: {x: 0.6431325, y: 0.20284493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny jump 5
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 571
+        width: 323
+        height: 266
+      alignment: 9
+      pivot: {x: 0.65444386, y: 0.32950932}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny Sprite Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 2030
+        y: 711
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny jump 6
+      rect:
+        serializedVersion: 2
+        x: 2096
+        y: 390
+        width: 323
+        height: 497
+      alignment: 9
+      pivot: {x: 0.6404035, y: 0.18519337}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny jump 1
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 134
+        width: 293
+        height: 369
+      alignment: 9
+      pivot: {x: 0.6431712, y: 0.5737401}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny jump 2
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 341
+        width: 321
+        height: 331
+      alignment: 9
+      pivot: {x: 0.6518745, y: 0.5959067}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny jump 7
+      rect:
+        serializedVersion: 2
+        x: 2478
+        y: 134
+        width: 258
+        height: 353
+      alignment: 9
+      pivot: {x: 0.5878887, y: 0.28802195}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny Sprite Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 2733
+        y: 411
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny idle
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 134
+        width: 343
+        height: 208
+      alignment: 9
+      pivot: {x: 0.6851038, y: 0.27106726}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny walk 1
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 133
+        width: 319
+        height: 225
+      alignment: 9
+      pivot: {x: 0.7096923, y: 0.32867622}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tawny walk 2
+      rect:
+        serializedVersion: 2
+        x: 1627
+        y: 133
+        width: 320
+        height: 221
+      alignment: 9
+      pivot: {x: 0.68777925, y: 0.33070552}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
