@@ -5,13 +5,22 @@ public class WingBoostAura : MonoBehaviour {
 
     public GameObject parent;
     public float pushForce;
-
+    public float duration;
+    private float startTime, currentTime;
     private Rigidbody2D rbody;
+
+    void Start()
+    {
+        startTime = Time.time;
+    }
 
 	void Update()
     {
         if (parent != null)
             transform.position = parent.transform.position;
+        currentTime = Time.time - startTime;
+        if (currentTime > duration)
+            Destroy(gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -220,14 +220,14 @@ public class GamepadInput : MonoBehaviour
 
     void CheckBoostButton()
     {
-        if (Input.GetButtonDown(player + "RightBumper") && wingBoostCount < wingBoostMax)                       // check if the jump button has been pressed
+        if (Input.GetButtonDown(player + "RightBumper") && wingBoostCount < wingBoostMax && onWall == 0 && !onGround)                       // check if the jump button has been pressed
         {
             wingXVal = inputXAxis * wingForce;
             wingYVal = -inputYAxis * wingForce;
             if (wingYVal > 0)
                 wingYVal *= 1.25f;
             rbody.velocity = new Vector2(wingXVal, wingYVal);
-            //launchBuffer = 0.2f;
+            launchBuffer = 0.2f;
             wingCharge = 0.25f;
             wingBoostCount++;
             if (wingBoostAura != null)
@@ -253,7 +253,7 @@ public class GamepadInput : MonoBehaviour
             if (wingCharge <= 0)
             {
                 wingCharge = 0;
-                Destroy(wingBoostAura);
+                //Destroy(wingBoostAura);
                 transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
             }
         }
@@ -268,6 +268,8 @@ public class GamepadInput : MonoBehaviour
             onGround = true;                                                                        // the player is ground
             wingBoostCount = 0;
             AnimateGrounded();
+            if (wingBoostAura != null)
+                Destroy(wingBoostAura);
         }
         else                                                                                    // else
             onGround = false;                                                                       // the player is ungrounded
@@ -300,6 +302,8 @@ public class GamepadInput : MonoBehaviour
                     onWall = -1;                                                                            // set onWall to -1, indicating a wall to the left
                     wingBoostCount = 0;
                     ChangeAnim(5);
+                if (wingBoostAura != null)
+                    Destroy(wingBoostAura);
                 //}
             }
         }
@@ -326,6 +330,8 @@ public class GamepadInput : MonoBehaviour
                     onWall = 1;                                                                             // set onWall to 1, indicating a wall to the right
                     wingBoostCount = 0;
                     ChangeAnim(5);
+                if (wingBoostAura != null)
+                    Destroy(wingBoostAura);
                 //}
             }
         }
