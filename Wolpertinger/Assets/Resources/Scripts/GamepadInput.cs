@@ -38,6 +38,12 @@ public class GamepadInput : MonoBehaviour
     private Animator animator;
     private float animLock;
 
+    public AudioClip landingWood;
+    public AudioClip jumpingWood;
+    public AudioClip landingLeaves;
+    public AudioClip wingboostFlap;
+    AudioSource audioSource;
+
 	void Start () 
 	{
 		rbody = GetComponent<Rigidbody2D>();
@@ -49,6 +55,7 @@ public class GamepadInput : MonoBehaviour
         wingBoostCount = 0;
         animator = GetComponent<Animator>();
         animLock = 0;
+        audioSource = GetComponent<AudioSource>();
 	}
 
 	void Update () 
@@ -180,6 +187,7 @@ public class GamepadInput : MonoBehaviour
                 jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
                 ChangeAnim(6);
                 animLock = 0.25f;
+                audioSource.PlayOneShot(jumpingWood, 1);
             }
             else if (onGround)                                                   // check if the player is jumping from the ground
             {
@@ -189,6 +197,7 @@ public class GamepadInput : MonoBehaviour
                 jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
                 ChangeAnim(2);
                 animLock = 0.25f;
+                audioSource.PlayOneShot(jumpingWood, 1);
             }
             else if (onPlayer)                                              // check if the player is jumping off the top of another player
             {
@@ -199,6 +208,7 @@ public class GamepadInput : MonoBehaviour
                 jumpCharge = 0.35f;                                             // sets the maximum amount of time that the player will gain extra height for holding the jump button
                 ChangeAnim(2);
                 animLock = 0.25f;
+                audioSource.PlayOneShot(jumpingWood, 1);
             }
             onGround = false;                                               // player is not grounded,
             onPlayer = false;                                               // player is not on top of another player,
@@ -237,13 +247,14 @@ public class GamepadInput : MonoBehaviour
             animLock = 0;
             ChangeAnim(7);
             animLock = wingCharge;
+            audioSource.PlayOneShot(wingboostFlap);
         }
         else if (wingCharge > 0)                                             // check if the player is should still be gaining force from the jump
         {
             if (rbody.velocity != Vector2.zero)
             {
-                float angle = Mathf.Atan2(rbody.velocity.y, Mathf.Abs(rbody.velocity.x)) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                //float angle = Mathf.Atan2(inputYAxis, Mathf.Abs(inputXAxis)) * Mathf.Rad2Deg;
+                //transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.position, new Vector3(Mathf.Abs(inputXAxis), inputYAxis, 0), 1, 1)); //Quaternion.AngleAxis(angle, Vector3.forward);
                 //Debug.Log(transform.rotation);
             }
             wingXVal = inputXAxis * wingForce * 5f * Time.deltaTime;
@@ -265,6 +276,8 @@ public class GamepadInput : MonoBehaviour
         groundCheckVec = new Vector2(rbody.position.x, rbody.position.y - 0.15f);                // the position of the vector is only 0.1 below the centre of the player
         if (Physics2D.OverlapCircle(groundCheckVec, 0.45f, 1 << 8, 0f, 0f) != null)             // using a circle collider slightly smaller than the player, check for collisions on the wall layer
         {
+            if (!onGround)
+                audioSource.PlayOneShot(landingWood, 1);
             onGround = true;                                                                        // the player is ground
             wingBoostCount = 0;
             AnimateGrounded();
@@ -277,6 +290,7 @@ public class GamepadInput : MonoBehaviour
 
 	void CheckIfOnWall()                                                                    // checks if the player is on a wall
 	{
+        var prevWall = onWall;
         onWall = 0;                                                                             // sets onWall to 0, indicating that the player is not on a wall. If the next two checks fail, this is the final value.
         Vector2 wallCheckVec;                                                                   // vector to check a position to the side of the player
         wallCheckVec = new Vector2(rbody.position.x + (circleCol.radius)*-1, rbody.position.y); // the position of the vector is to the player's left
@@ -299,11 +313,13 @@ public class GamepadInput : MonoBehaviour
                 //}
                 //else
                 //{
-                    onWall = -1;                                                                            // set onWall to -1, indicating a wall to the left
-                    wingBoostCount = 0;
-                    ChangeAnim(5);
+                if (prevWall == 0)
+                    audioSource.PlayOneShot(landingWood, 1);
+                onWall = -1;                                                                            // set onWall to -1, indicating a wall to the left
+                wingBoostCount = 0;
+                ChangeAnim(5);
                 if (wingBoostAura != null)
-                    Destroy(wingBoostAura);
+                Destroy(wingBoostAura);
                 //}
             }
         }
@@ -327,11 +343,13 @@ public class GamepadInput : MonoBehaviour
                 //}
                 //else
                 //{
-                    onWall = 1;                                                                             // set onWall to 1, indicating a wall to the right
-                    wingBoostCount = 0;
-                    ChangeAnim(5);
+                if (prevWall == 0)
+                    audioSource.PlayOneShot(landingWood, 1);
+                onWall = 1;                                                                             // set onWall to 1, indicating a wall to the right
+                wingBoostCount = 0;
+                ChangeAnim(5);
                 if (wingBoostAura != null)
-                    Destroy(wingBoostAura);
+                Destroy(wingBoostAura);
                 //}
             }
         }
@@ -345,6 +363,7 @@ public class GamepadInput : MonoBehaviour
 		var goombaList = Physics2D.OverlapCircleAll(playerCheckVec, 0.45f, 1, 0f, 0f);          // check for collisions with player objects, and put all returned IDs into a list
 		if (goombaList.Length > 0)                                                              // check if any IDs were returned
 		{
+            //PLAY SQUEAK
 			onPlayer = true;                                                                        // the player is on another player
 			goomba = goombaList[0].GetComponent<Rigidbody2D>();                                     // keep a reference to the first colliding player on the list (couldn't think of a better variable name sorry) 
             wingBoostCount = 0;
@@ -362,7 +381,7 @@ public class GamepadInput : MonoBehaviour
         if (animator.GetInteger("AnimState") == 3)
         {
             ChangeAnim(4);
-            animLock = 0.1f;
+            animLock = 0.05f;
         }
         else if (Mathf.Abs(rbody.velocity.x) > 0.1)
         {

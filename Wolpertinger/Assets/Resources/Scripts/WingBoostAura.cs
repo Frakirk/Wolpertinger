@@ -38,6 +38,8 @@ public class WingBoostAura : MonoBehaviour {
             if (yForce > 0)
                 yForce *= 1.25f;
             rbody.velocity += new Vector2(xForce, yForce);
+            //GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().hitstopTime = 0.2f;
+            //Time.timeScale = 0;
         }
     }
 }
