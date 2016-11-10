@@ -43,6 +43,7 @@ public class Killzone : MonoBehaviour {
             other.gameObject.transform.SetParent(cameraTransform);
             other.gameObject.transform.position = cameraTransform.position;
             Destroy(other.gameObject.GetComponent<Rigidbody2D>());
+            Destroy(other.gameObject.GetComponent<CircleCollider2D>());
             other.gameObject.GetComponent<GamepadInput>().enabled = false;
             //deadPlayers[numPlayersDead] = other.gameObject.GetComponent<Transform>();
             //Debug.Log("NEW DEAD GUY: " + deadPlayers[numPlayersDead]);
